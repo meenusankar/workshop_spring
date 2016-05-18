@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="resources/js/lib/jquery/jquery-2.1.4.min.js"></script>
+
+    <script type="text/javascript">
+
+        var websocket = null;
+
+        function connect() {
+            var wsURI = 'ws://' + window.location.host + '/springrest/websocket/helloName';
+            websocket = new WebSocket(wsURI);
+
+            websocket.onopen = function() {
+                displayStatus('Open');
+                document.getElementById('sayHello').disabled = false;
+                displayMessage('Connection is now open.');
+                console.log('Connection is now open.');
+
+            };
+            websocket.onmessage = function(event) {
+                // log the event
+                displayMessage('The response was received! ' + event.data, 'success');
+                console.log('Response was received' + event.data);
+            };
+            websocket.onerror = function(event) {
+                // log the event
+                displayMessage('Error! ' + event.data, 'error');
+                console.log('Error occurred:' + event.data);
+            };
+            websocket.onclose = function() {
+                displayStatus('Closed');
+                displayMessage('The connection was closed or timed out. ');
+                document.getElementById('sayHello').disabled = true;
+                console.log('Connection was closed or timed out');
+            };
+        }
+
+        function disconnect() {
+            if (websocket !== null) {
+                websocket.close();
+                websocket = null;
+            }
+            var message = document.getElementById('hellomessage');
+            message.setAttribute("class", "message");
+            message.value = 'WebSocket closed.';
+            // log the event
+            console.log('Websocket closed from disconnect()');
+        }
+
+        function sendMessage() {
+            if (websocket !== null) {
+                var content = document.getElementById('name').value;
+                websocket.send(content);
+                console.log('Send message');
+            } else {
+                displayMessage('WebSocket connection is not established.', 'error');
+                console.log('Connection is not established!');
+            }
+        }
+
+        function displayMessage(data, style) {
+            var message = document.getElementById('hellomessage');
+            message.setAttribute("class", style);
+            message.value = data;
+            console.log('display message from server ' + data);
+        }
+
+        function displayStatus(status) {
+            var currentStatus = document.getElementById('currentstatus');
+            currentStatus.value = status;
+            console.log('display current status: ' + status);
+        }
+
+
+    </script>
+</head>
+<body>
+<div>
+    <h1>Welcome to Red Hat JBoss Enterprise Application Platform!</h1>
+    <div>This is a simple example of a WebSocket implementation.</div>
+    <div id="connect-container">
+        <div>
+            <fieldset>
+                <legend>Connect or disconnect using websocket :</legend>
+                <input type="button" id="connect" onclick="connect();" value="Open Connection" />
+                <input type="button" id="disconnect" onclick="disconnect();" value="Close Connection" />
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend>Here is returned message : </legend>
+                <input id="name" type="text" size="40" style="width: 40%"/>
+                <input type="button" id="sayHello" onclick="sendMessage();" value="Say Hello" disabled="disabled"/>
+            </fieldset>
+        </div>
+        <div>Current WebSocket Connection Status: <output class="message" id="currentstatus">Closed</output></div>
+        <div>
+            <output id="hellomessage"></output>
+        </div>
+    </div>
+</div>
+</body>
+</html>

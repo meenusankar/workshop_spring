@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+    <!-- JQuery must be declared before bootstrap -->
+    <script src="resources/js/lib/jquery/jquery-2.1.4.min.js"></script>
+    <script src="resources/bootstrap/js/bootstrap.js"></script>
+    <link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+    <script src="resources/js/lib/angular/angular.js"></script>
+    <script src="resources/js/lib/angular/angular-resource.js"></script>
+    <script src="resources/js/lib/angular/angular-websocket.js"></script>
+    <script src="resources/js/app.js"></script>
+    <script src="resources/js/controllers/WebSocketController.js"></script>
+
+</head>
+<body ng-app="myApp">
+<div class="header">
+    <div class="container">
+        <h1>Invoke JMS to send new Message to Receiver.html</h1>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- Handle overall $http related stuff -->
+    <div ng-controller="WebSocketController">
+        <h1>Send a new Message</h1>
+
+        <form ng-submit="submit()">
+            <button id="sendButton" type="submit">Acknowledge a Message</button>&nbsp;&nbsp;
+            Message ID: <input id="msgId" type="text" ng-model="messageid">
+        </form>
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <td>ID</td>
+                <td>Reservoir</td>
+                <td>Message</td>
+                <td>Time</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="message in ConnectionFactory.collection">
+                <td>{{ message.id }}</td>
+                <td>{{ message.reservoir }}</td>
+                <td>{{ message.title }} - {{message.description}}</td>
+                <td>{{ message.submitTime | date : 'h:mma, EEE, d MMM, y'}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
