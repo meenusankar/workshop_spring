@@ -19,11 +19,11 @@ public class SpringRestService {
 
     public List<Message> getAllEvents() {
         if ( messageList.size() == 0) {
-            messageList.add(new Message("", 12345L, "ALU", "Instruction Pending", "Testing Instruction creation", new Date(), new Date(), "MJ", "Pending", "noaction"));
-            messageList.add(new Message("", 12346L, "JHT", "Implementation Created", "Testing", new Date(), new Date(), "WISPSOSE", "Submitted", "noaction"));
-            messageList.add(new Message("", 12347L, "SFL", "Instruction Pending", "Testing Instruction send", new Date(), new Date(), "HLPPSOSE", "Pending", "noaction"));
-            messageList.add(new Message("", 12348L, "CQD", "Instruction Sent", "Instruction was sent", new Date(), new Date(), "PSOSE", "Sent", "noaction"));
-            messageList.add(new Message("", 12349L, "PCN", "Instruction Pending", "Testing Instruction send", new Date(), new Date(), "WISPSOSE", "Pending", "noaction"));
+            messageList.add(new Message("", 12345L, "ABC", "Pending", "Message is pending", new Date(), new Date(), "MJ", "Pending", "noaction"));
+            messageList.add(new Message("", 12346L, "EFG", "Created", "Message is created", new Date(), new Date(), "JSmith", "Submitted", "noaction"));
+            messageList.add(new Message("", 12347L, "XXL", "Pending", "Message is pending", new Date(), new Date(), "JDoe", "Pending", "noaction"));
+            messageList.add(new Message("", 12348L, "XSL", "Sent", "Message is sent", new Date(), new Date(), "WAnderson", "Sent", "noaction"));
+            messageList.add(new Message("", 12349L, "MMG", "Completed", "Message was sent and completed", new Date(), new Date(), "KRon", "Completed", "noaction"));
         }
         return messageList;
     }

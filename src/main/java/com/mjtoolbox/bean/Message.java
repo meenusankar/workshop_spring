@@ -11,7 +11,7 @@ public class Message {
 
     private String oid;
     private Long id;
-    private String reservoir;
+    private String code;
     private String title;
     private String description;
     private Date triggerTime;
@@ -24,10 +24,10 @@ public class Message {
     public Message() {
     }
 
-    public Message(String oid, Long id, String reservoir, String title, String description, Date triggerTime, Date submitTime, String submitBy, String status, String action) {
+    public Message(String oid, Long id, String code, String title, String description, Date triggerTime, Date submitTime, String submitBy, String status, String action) {
         this.oid = oid;
         this.id = id;
-        this.reservoir = reservoir;
+        this.code = code;
         this.title = title;
         this.description = description;
         this.triggerTime = triggerTime;
@@ -53,12 +53,12 @@ public class Message {
         this.id = id;
     }
 
-    public String getReservoir() {
-        return reservoir;
+    public String getCode() {
+        return code;
     }
 
-    public void setReservoir(String reservoir) {
-        this.reservoir = reservoir;
+    public void setCode(String reservoir) {
+        this.code = reservoir;
     }
 
     public String getTitle() {
@@ -122,7 +122,7 @@ public class Message {
         return "Message{" +
                 "oid='" + oid + '\'' +
                 ", id=" + id +
-                ", reservoir='" + reservoir + '\'' +
+                ", code='" + code + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", triggerTime=" + triggerTime +
