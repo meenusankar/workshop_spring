@@ -2,11 +2,10 @@ package com.mjtoolbox.controller;
 
 import com.mjtoolbox.bean.Message;
 import com.mjtoolbox.service.SpringRestService;
+import com.mjtoolbox.utility.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,10 +18,8 @@ public class SpringRestController {
     @Autowired
     private SpringRestService springRestService;
 
-
     @RequestMapping(value = "/messages", method = RequestMethod.GET, headers = "Accept=application/json")
-    public List<Message> getMessageList()
-    {
+    public List<Message> getMessageList() {
         return springRestService.getAllEvents();
     }
 
@@ -32,7 +29,7 @@ public class SpringRestController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public void updateMessage(@RequestBody  Message message) {
+    public void updateMessage(@RequestBody Message message) {
         springRestService.updateEvent(message);
     }
 
@@ -48,8 +45,7 @@ public class SpringRestController {
 
     @RequestMapping(value = "/{name}", method = RequestMethod.GET)
     public String getUsername(@PathVariable String name) {
-        String result = "Hello " + name;
-        return result;
+        return Utility.loadProperties().getProperty("messageText") + name;
     }
 
 }
